@@ -29,6 +29,7 @@ class WikisController < ApplicationController
   def update
     # @item = Item.find(params[:id]) - not necessary because of before_action to set item
      @wiki.assign_attributes(wiki_params)
+     #authorize @wiki
      if @wiki.save
        flash[:notice] = "Wiki was updated."
       redirect_to wikis_path 

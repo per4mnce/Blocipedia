@@ -1,4 +1,4 @@
-<h3><%= @wikis.count %> <%= "Wiki".pluralize(@wikis.count) %> for <%= current_user.email %></h3>
+<h3><%= @wikis.count %> <%= "Wiki".pluralize(@wikis.count) %> for <%= current_user.name %></h3>
   <table class="table table-striped">
     <tr>
       <th>TITLE</th>
@@ -19,7 +19,9 @@
           <% end %>
         </td>
         <td>
-          <%= wiki.private %>
+          <% if wiki.private %>
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+          <% end %>
         </td>
         <td align="left" class="action">
           <%= link_to "", wiki, method: :delete, class: 'glyphicon glyphicon-remove', data: { confirm: 'Are you sure you want to delete this Wiki?' }  %>
