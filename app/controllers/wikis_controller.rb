@@ -3,7 +3,11 @@ class WikisController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @wikis = current_user.wikis.order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
+    #@wikis = current_user.wikis.order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
+    @wikis = Wiki.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
+    @wikiPrivateCount = Wiki.where(private: true).count.to_s
+    @personalWikiCount = current_user.wikis.count.to_s
+    @PersonalWikiPrivateCount = current_user.wikis.where(private: true).count.to_s
   end
  
   def show
@@ -24,12 +28,15 @@ class WikisController < ApplicationController
   
   def edit
     # Render the edit view
+    # @ wiki is set in the private set_record method and executed by the before_action:
+    #@wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
   
   def update
     # @item = Item.find(params[:id]) - not necessary because of before_action to set item
      @wiki.assign_attributes(wiki_params)
-     #authorize @wiki
+     authorize @wiki
      if @wiki.save
        flash[:notice] = "Wiki was updated."
       redirect_to wikis_path 
@@ -58,11 +65,12 @@ class WikisController < ApplicationController
   private
   
   def set_record
-    begin
-      @wiki = current_user.wikis.find(params[:id]) 
-    rescue 
-      @wiki = nil
-    end
+    @wiki = Wiki.find(params[:id])
+    # begin
+    #   @wiki = current_user.wikis.find(params[:id]) 
+    # rescue 
+    #   @wiki = nil
+    # end
   end
   
   def wiki_params

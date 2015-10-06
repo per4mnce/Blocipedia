@@ -9,7 +9,7 @@
 <% else %>
   <p>I couldn't find that wiki in your list.</p>
 <% end %> 
-<% if authorize @wiki %>
+<% if policy(@wiki).edit? %>
   <%= link_to "Edit Wiki", edit_wiki_path, class: 'btn btn-success' %>
 <% end %>
 <%= link_to "Wiki List", wikis_path, class: 'btn btn-success' %>

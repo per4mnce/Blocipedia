@@ -1,8 +1,10 @@
-<h3><%= @wikis.count %> <%= "Wiki".pluralize(@wikis.count) %> for <%= current_user.name %></h3>
+<h5><%= @wikis.count %> <%= "Wiki".pluralize(@wikis.count) %> total. (<%= @wikiPrivateCount %> are privates.)</h5>
+<h5><%= @personalWikiCount %> <%= "Wiki".pluralize(@personalWikiCount.to_i) %> owned by you. (<%= @PersonalWikiPrivateCount %> are private.)</h5>
   <table class="table table-striped">
     <tr>
       <th>TITLE</th>
       <th>BODY</th>
+      <th>AUTHOR</th>
       <th>PRIVATE</th>
       <th>DELETE</th>
     </tr>
@@ -17,6 +19,9 @@
             <% max_size = 50 %>
             <%= wiki.body.length > max_size ? markdown(wiki.body[0,max_size] + "...") : markdown(wiki.body)  %>
           <% end %>
+        </td>
+         <td>
+          <%= User.find(wiki.user_id).name %>
         </td>
         <td>
           <% if wiki.private %>
