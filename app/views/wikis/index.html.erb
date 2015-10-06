@@ -29,4 +29,6 @@
       </tr>
     <% end %>
   </table>
-<%= link_to "New wiki ", new_wiki_path, class: 'btn btn-success' %>
+<%= link_to "New wiki ", new_wiki_path, class: 'btn btn-success' %><br /><br />
+<div><%= page_entries_info @wikis, renderer: BootstrapPagination::Rails %></div>
+<%= will_paginate @wikis, renderer: BootstrapPagination::Rails %>

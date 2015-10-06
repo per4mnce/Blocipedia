@@ -3,7 +3,7 @@ class WikisController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @wikis = current_user.wikis.order("created_at DESC")
+    @wikis = current_user.wikis.order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
   end
  
   def show
