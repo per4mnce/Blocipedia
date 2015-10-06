@@ -35,7 +35,10 @@ source 'https://rubygems.org'
  gem 'redcarpet'
  #Add a greatly enhanced rails console
  gem 'pry-rails', :group => :development
- 
+ #Add authorization
+ gem 'pundit'
+ #Add pagination
+ gem 'will_paginate-bootstrap'
 #-------------------------------------------------------------------------------
 # source 'https://rubygems.org'
 # # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

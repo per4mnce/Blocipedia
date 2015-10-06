@@ -6,7 +6,7 @@
  
 50.times do
   User.create!(
-    # name:     Faker::Name.name,
+    name:     Faker::Name.name,
     email:    Faker::Internet.email,
     password: Faker::Internet.password(8, 15)
   )
@@ -26,7 +26,7 @@ wikis = Wiki.all
 
 #Generate data for Henry
 User.first.update_attributes!(
-  # name:     'Henry Schaumburger',
+  name:     'Henry Schaumburger',
   email:    'per4mnce@gmail.com',
   password: 'password'
 )
