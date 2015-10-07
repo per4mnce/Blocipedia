@@ -35,19 +35,35 @@
   </div>
   
   <div class="field">
-    <%= f.label "Role" %><br />
+    <%= f.label "Role Attribute (TESTING ONLY)" %><br />
     <%= f.radio_button :role, :standard %> Standard
     <%= f.radio_button :role, :premium %> Premium
+    <%= f.radio_button :role, :admin %> Admin
   </div>
-
+  
   <div class="actions">
-    <%= f.submit "Update", class: 'btn btn-success' %>
+    <%= f.submit "Update Profile", class: 'btn btn-success' %> 
   </div>
 <% end %>
+<br />
+<div class="progress">
+  <div class="progress-bar" style="width: 100%;"></div>
+</div>
 
-<h3>Cancel my account</h3>
+<div>
+  <b>Current level:</b> <%= current_user.role %> <br />
+  <% if current_user.premium? %>
+    You have the ability to create Wikis.
+    <%= button_to "Downgrade to standard", new_charge_path, data: { confirm: "Are you sure you want to downgrade to premium?" }, class: 'btn btn-warning', method: :get %>
+  <% end %>
+  <% if current_user.standard? %>
+    <%= button_to "Upgrade to premium", new_charge_path, data: { confirm: "Are you sure you want to upgrade to premium?" }, class: 'btn btn-warning', method: :get %>
+  <% end %>
+</div>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>
+<br />
+<b>Cancel my account</b> - Unhappy?
+<%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>
 
 <%= link_to "Back", :back %>
 

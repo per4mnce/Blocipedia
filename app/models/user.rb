@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   
+  validates :name, length: { minimum: 3 } , presence: true
+  
   has_many :wikis
   
   enum role: [:standard, :premium, :admin]

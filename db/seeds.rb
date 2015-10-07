@@ -19,7 +19,7 @@ users = User.all
     user:     users.sample,
     title:    Faker::Lorem.word + " " + Faker::Lorem.word,
     body:     Faker::Lorem.paragraph,
-    private:  false
+    private:  [true, false].sample
   )
 end
 wikis = Wiki.all  
@@ -37,7 +37,7 @@ User.first.update_attributes!(
     user:     User.first,
     title:    Faker::Lorem.word + " " + Faker::Lorem.word,
     body:     Faker::Lorem.paragraph,
-    private:  false
+    private:  [true, false].sample
     # created_at: Faker::Time.between(100.days.ago, Time.now, :all)
   )
 end
