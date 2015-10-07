@@ -39,6 +39,8 @@ source 'https://rubygems.org'
  gem 'pundit'
  #Add pagination
  gem 'will_paginate-bootstrap'
+ #Add Stripe for credit card processing
+ gem 'stripe'
 #-------------------------------------------------------------------------------
 # source 'https://rubygems.org'
 # # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

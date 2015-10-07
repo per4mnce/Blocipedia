@@ -4,7 +4,7 @@
     <%= f.label :title %>
     <%= f.text_field :title, autofocus: true,   class: 'form-control', placeholder: "Enter wiki name" %>
     <%= f.label :body %>
-    <%= f.text_area :body,                      class: 'form-control', placeholder: "Enter wiki content" %>
+    <%= f.text_area :body,                      class: 'form-control', placeholder: "Enter wiki content", size: "25x6" %>
     <p>**bold** _italic_ `code` >quote * - bullet list"</p>
     <%= f.label :private %>
     <%= f.check_box :private,                   class: 'checkbox' %>
