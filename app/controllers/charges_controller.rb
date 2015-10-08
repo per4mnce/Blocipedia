@@ -1,5 +1,20 @@
 class ChargesController < ApplicationController
    
+  def downgrade
+    #Called from the apps/views/devise/registrations/edit.html.erb button
+    
+    #Add stripe code to refund the amount paid here id desired
+    current_user.standard! #Downgrade user to standard
+    current_user.wikis.each { |wiki| wiki.update_attribute(:private, false) }
+    flash[:notice] = "Your account was downgraded.  All private Wikis are now public.  Have a nice day!"
+    redirect_to root_path
+    
+    #Alternatite ways to do things
+    #current_user.update_attributes(role: 'standard')
+    #current_user.wikis.where(private: true).update_all(private: false)
+    #redirect_to edit_user_registration_path
+  end
+   
    def new
      @stripe_btn_data = {
        key: "#{ Rails.configuration.stripe[:publishable_key] }",
