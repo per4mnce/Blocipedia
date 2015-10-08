@@ -20,7 +20,7 @@ class WikiPolicy < ApplicationPolicy
         # Must be Admin or wiki creator to update
         true if user.present? && (user.admin? || record.user == user)
       else
-        #Dissallow anyth other record.private value
+        #Dissallow any other record.private value
         false
     end
   end

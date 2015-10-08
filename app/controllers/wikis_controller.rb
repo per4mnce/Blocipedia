@@ -3,9 +3,21 @@ class WikisController < ApplicationController
   before_action :authenticate_user!
   
   def index
+    # if current_user.admin?
+    #   @wikis = Wiki.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
+    # elsif current_user.premium?
+    #   #Show all public wikis and owned private wikis
+    #   #@wikis = "Not sure how to define collection"
+    # else 
+    #   #current_user.standard?
+    #   #Show only public wikis
+    #   @wikis = Wiki.where(private: false).order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
+    # end
+      
     #@wikis = current_user.wikis.order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
-    @wikis = Wiki.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
-    @wikiPrivateCount = Wiki.where(private: true).count.to_s
+    #@wikis = Wiki.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
+    #@wikiPrivateCount = Wiki.where(private: true).count.to_s
+    @wikis = Wiki.visible_to(current_user).ordered.paginate(:page => params[:page], :per_page => 5)
     @personalWikiCount = current_user.wikis.count.to_s
     @PersonalWikiPrivateCount = current_user.wikis.where(private: true).count.to_s
   end
