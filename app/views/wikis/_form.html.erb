@@ -12,12 +12,11 @@
         <%= f.check_box :private %> Private wiki
       </div>
     <% end %>
-    
-    <!--<%= f.label :private %>-->
-    <!--<%= f.check_box :private,                   class: 'checkbox' %>-->
-  
   
   </div>
   <%= f.submit "Save", class: 'btn btn-success' %>
   <%= link_to "Cancel", wikis_path, class: 'btn btn-success' %>
+  <% if current_user.admin? || current_user.premium? %>
+    <%= button_to "Manage Collaborators", "", data: { confirm: "Are you sure you want to manage collaborators?" }, class: 'btn btn-success', method: :get %>
+  <% end %>
 <% end %>
